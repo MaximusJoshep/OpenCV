@@ -1,6 +1,8 @@
 #include <iostream>
 #include "image.h"
 #include "rgb.h"
+#include "kernel.h"
+
 int main(int argc, char* argv[])
 {
     if(argc > 1)
@@ -9,8 +11,17 @@ int main(int argc, char* argv[])
         std::string image_path = argv[1];
         Image<RGB<u_char>>image;
         image.Read(image_path);
-        image.Update();
 
+        Kernel k({
+                    {-1,0,1},
+                    {-1,0,1},
+                    {-1,0,1},
+                });
+
+        image.toGrayscale();
+        image.update();
+        image.filter(k);
+        image.update();
     }
     else
     {
