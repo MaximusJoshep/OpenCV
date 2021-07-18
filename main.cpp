@@ -12,16 +12,34 @@ int main(int argc, char* argv[])
         Image<RGB<u_char>>image;
         image.Read(image_path);
 
-        Kernel k({
-                    {-1,0,1},
-                    {-1,0,1},
-                    {-1,0,1},
-                });
+        /*
+        Kernel smoothKernel({
+            {1,1,1},
+            {1,1,1},
+            {1,1,1}
+        });
+        */
 
+
+        //Grayscale
         image.toGrayscale();
-        image.update();
-        image.filter(k);
-        image.update();
+        image.Update();
+
+        /*
+        //Smooth
+        float scale = 1/9.f;
+        image.Filter(smoothKernel, scale);
+        image.Update();
+        */
+
+        //Prewitt
+        //image.Prewitt();
+        //image.Update();
+
+        //Sobel
+        image.Sobel();
+        image.Update();
+
     }
     else
     {
