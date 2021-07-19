@@ -12,20 +12,20 @@ int main(int argc, char* argv[])
         Image<RGB<u_char>>image;
         image.Read(image_path);
 
+        //Ecualizacion
+        image.data = image.Ecualizar(image.data , image.rows, image.columns);
+        image.Update();
+
         /*
         Kernel smoothKernel({
             {1,1,1},
             {1,1,1},
             {1,1,1}
         });
-        */
-
-
         //Grayscale
         image.toGrayscale();
         image.Update();
 
-        /*
         //Smooth
         float scale = 1/9.f;
         image.Filter(smoothKernel, scale);
@@ -37,9 +37,9 @@ int main(int argc, char* argv[])
         //image.Update();
 
         //Sobel
+        image.Read(image_path);
         image.Sobel();
         image.Update();
-
     }
     else
     {

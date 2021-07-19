@@ -31,12 +31,15 @@ public:
     //Ecualizacion
     std::vector<std::vector<PixelType>> Ecualizar(DataType input, int rows, int cols);
 
-private:
-    int getMin(int array[], int size);
-    cv::Mat fillBorders(cv::Mat& vec, int size);
+
+    //public Data
     DataType data;
     std::size_t rows{ 0 };
     std::size_t columns{ 0 };
+
+private:
+    int getMin(int array[], int size);
+    cv::Mat fillBorders(cv::Mat& vec, int size);
 };
 
 
@@ -322,6 +325,15 @@ void Image<PixelType>::Sobel()
     }
 }
 
+template<typename PixelType>
+int Image<PixelType>::getMin(int array[], int size)
+{
+   int min = 0;
+    for (int i = 0; i < size; i++)
+       if (array[i] < min)
+         min = array[i];
+         return min;
+}
 
 template<typename PixelType>
 std::vector<std::vector<PixelType>>  Image<PixelType>::Mediana(DataType input, int rows, int cols)
